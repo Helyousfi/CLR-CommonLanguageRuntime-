@@ -1,6 +1,6 @@
 # CLR-CommonLanguageRuntime-
 ## App Domains
-An app domain is a container where .NET code can run.
+An app domain is a logically isolated container in which .NET code runs.
 
 ## The CLR
 The CLR (Common Language Runtime) is the central element of the .NET architecture. The CLR is a software layer that handles the execution of .NET application code. 
