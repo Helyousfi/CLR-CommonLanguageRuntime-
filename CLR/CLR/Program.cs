@@ -4,18 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AppDomains
+namespace CLR
 {
-    class program
+    internal class Program
     {
         static void Main(string[] args)
         {
-            // Secured App domain
+            // Create a Secured App domain
             AppDomain securedAppDomain =
                 AppDomain.CreateDomain("SecuredAppDomain");
 
+            // Retrieve the type of the thirdparty
+            Type thirdParty = typeof(ThirdParty);
 
+            // Create an instance of ThirdParty 
+            securedAppDomain.CreateInstanceAndUnwrap(
+                thirdParty.Assembly.FullName, thirdParty.FullName);
 
+            AppDomain.Unload(securedAppDomain);
 
             Class1 obj1 = new Class1();
             Class2 obj2 = new Class2();
@@ -24,7 +30,7 @@ namespace AppDomains
         }
     }
 
-
+    [Serializable]
     class ThirdParty
     {
         public ThirdParty()
