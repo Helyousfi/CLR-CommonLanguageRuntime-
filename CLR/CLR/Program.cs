@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,9 +12,24 @@ namespace CLR
     {
         static void Main(string[] args)
         {
+            var perm = new PermissionSet(PermissionState.None);
+            perm.AddPermission(
+                new SecurityPermission(SecurityPermissionFlag.Execution)
+                );
+            perm.AddPermission(
+                new FileIOPermission(FileIOPermissionAccess.NoAccess, @"c:\")
+                );
+
+            var setup = new AppDomainSetup();
+            setup.ApplicationBase = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+
+
             // Create a Secured App domain
             AppDomain securedAppDomain =
-                AppDomain.CreateDomain("SecuredAppDomain");
+                AppDomain.CreateDomain("SecuredAppDomain", 
+                null, 
+                setup, 
+                perm);
 
             // Retrieve the type of the thirdparty
             Type thirdParty = typeof(ThirdParty);
