@@ -1,5 +1,8 @@
 # CLR-CommonLanguageRuntime-
 ## App Domains
+An app domain is a container where .NET code can run.
+
+## The CLR
 The CLR (Common Language Runtime) is the central element of the .NET architecture. The CLR is a software layer that handles the execution of .NET application code. 
 Here's what the CLR is doing (a non-exhaustive list): 
 - Exceptions handling : The CLR manages the handling of exceptions in .NET applications. When unexpected errors or exceptional situations occur during the execution of code, the CLR is responsible for catching and managing these exceptions.
